@@ -3,6 +3,7 @@ import GlobalStyles from './styles/GlobalStyles';
 import Layout from './components/Layout';
 import { Timeline } from './components/Timeline';
 import { CoreValues } from './components/CoreValues';
+import { Tech } from './components/Tech';
 
 const SectionContent = styled.div`
   max-width: 800px;
@@ -40,7 +41,8 @@ const App = () => {
 
         <SectionContent>
           <Title>Tech Stack</Title>
-          <Subtitle>Technologies I work with</Subtitle>
+          <Subtitle>Main technologies I work with</Subtitle>
+          <Tech />
         </SectionContent>
 
         <SectionContent>
