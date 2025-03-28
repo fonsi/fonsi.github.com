@@ -1,28 +1,56 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalStyles from './styles/GlobalStyles';
-import Header from './components/Header';
+import Layout from './components/Layout';
 
-const MainContainer = styled.main`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 6rem 2rem 2rem;
+const SectionContent = styled.div`
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+`;
+
+const Title = styled.h1`
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #212529;
+`;
+
+const Subtitle = styled.p`
+  font-size: 1.5rem;
+  color: #6c757d;
+  margin-bottom: 2rem;
 `;
 
 const App = () => {
   return (
-    <Router>
+    <>
       <GlobalStyles />
-      <Header />
-      <MainContainer>
-        <Routes>
-          <Route path="/" element={<div>Home Page</div>} />
-          <Route path="/about" element={<div>About Page</div>} />
-          <Route path="/projects" element={<div>Projects Page</div>} />
-          <Route path="/contact" element={<div>Contact Page</div>} />
-        </Routes>
-      </MainContainer>
-    </Router>
+      <Layout>
+        <SectionContent>
+          <Title>Welcome to My Portfolio</Title>
+          <Subtitle>Product Engineer & Full Stack Developer</Subtitle>
+        </SectionContent>
+
+        <SectionContent>
+          <Title>Tech Stack</Title>
+          <Subtitle>Technologies I work with</Subtitle>
+        </SectionContent>
+
+        <SectionContent>
+          <Title>Experience</Title>
+          <Subtitle>My professional journey</Subtitle>
+        </SectionContent>
+
+        <SectionContent>
+          <Title>Projects</Title>
+          <Subtitle>Featured work and side projects</Subtitle>
+        </SectionContent>
+
+        <SectionContent>
+          <Title>Get in Touch</Title>
+          <Subtitle>Let's work together</Subtitle>
+        </SectionContent>
+      </Layout>
+    </>
   );
 };
 
