@@ -1,4 +1,4 @@
-import { useEffect, useState, Children } from 'react';
+import { useEffect, useState, Children, useRef } from 'react';
 import styled from 'styled-components';
 
 const LayoutContainer = styled.div`
@@ -22,8 +22,9 @@ const Section = styled.section<{ isActive: boolean }>`
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  opacity: ${props => props.isActive ? 1 : 0.5};
-  transition: opacity 0.3s ease;
+  opacity: ${props => props.isActive ? 1 : 0.3};
+  transform: ${props => props.isActive ? 'scale(1)' : 'scale(0.95)'};
+  transition: all 0.5s ease;
 `;
 
 const Sidebar = styled.nav`
@@ -70,29 +71,40 @@ const sections = ['Home', 'Tech', 'Jobs', 'Projects', 'Contact'];
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [activeSection, setActiveSection] = useState(0);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const sectionsRef = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = document.querySelectorAll('section');
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
-
-      sections.forEach((section, index) => {
-        const sectionTop = section.offsetTop;
-        const sectionBottom = sectionTop + section.offsetHeight;
-
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          setActiveSection(index);
-        }
-      });
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    observerRef.current = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionIndex = sectionsRef.current.indexOf(entry.target as HTMLElement);
+          setActiveSection(sectionIndex);
+        }
+      });
+    }, options);
+
+    // Store sections in ref and observe them
+    sectionsRef.current = Array.from(document.querySelectorAll('section')) as HTMLElement[];
+    sectionsRef.current.forEach((section) => {
+      observerRef.current?.observe(section);
+    });
+
+    return () => {
+      sectionsRef.current.forEach((section) => {
+        observerRef.current?.unobserve(section);
+      });
+    };
   }, []);
 
   const scrollToSection = (index: number) => {
-    const sections = document.querySelectorAll('section');
-    sections[index].scrollIntoView({ behavior: 'smooth' });
+    sectionsRef.current[index].scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
