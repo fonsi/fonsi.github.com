@@ -125,30 +125,25 @@ const DateContainer = styled.div<{ isLeft?: boolean }>`
   }
 `;
 
-const Timeline = () => {
-  return (
-    <TimelineContainer>
-      {jobs.map((job, index) => (
-        <TimelineItem key={job.company} isLeft={index % 2 === 0}>
-          <DateContainer isLeft={index % 2 === 0}>
-            {new Date(job.from).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} - 
-            {job.to === 'current' ? ' Present' : ` ${new Date(job.to).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}`}
-          </DateContainer>
-          <JobCard>
-            <JobTitle>{job.title}</JobTitle>
-            <JobCompany>{job.company}</JobCompany>
-            <JobLocation>{job.location}</JobLocation>
-            <JobDescription>{job.description}</JobDescription>
-            <TechStack>
-              {job.techStack.map((tech) => (
-                <TechTag key={tech}>{tech}</TechTag>
-              ))}
-            </TechStack>
-          </JobCard>
-        </TimelineItem>
-      ))}
-    </TimelineContainer>
-  );
-};
-
-export default Timeline; 
+export const Timeline = () =>
+  <TimelineContainer>
+    {jobs.map((job, index) => (
+      <TimelineItem key={job.company} isLeft={index % 2 === 0}>
+        <DateContainer isLeft={index % 2 === 0}>
+          {new Date(job.from).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} - 
+          {job.to === 'current' ? ' Present' : ` ${new Date(job.to).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}`}
+        </DateContainer>
+        <JobCard>
+          <JobTitle>{job.title}</JobTitle>
+          <JobCompany>{job.company}</JobCompany>
+          <JobLocation>{job.location}</JobLocation>
+          <JobDescription>{job.description}</JobDescription>
+          <TechStack>
+            {job.techStack.map((tech) => (
+              <TechTag key={tech}>{tech}</TechTag>
+            ))}
+          </TechStack>
+        </JobCard>
+      </TimelineItem>
+    ))}
+  </TimelineContainer>;

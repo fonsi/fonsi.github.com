@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import GlobalStyles from './styles/GlobalStyles';
 import Layout from './components/Layout';
-import Timeline from './components/Timeline';
+import { Timeline } from './components/Timeline';
+import { CoreValues } from './components/CoreValues';
 
 const SectionContent = styled.div`
   max-width: 800px;
@@ -29,6 +30,12 @@ const App = () => {
         <SectionContent>
           <Title>Welcome to My Portfolio</Title>
           <Subtitle>Product Engineer & Full Stack Developer</Subtitle>
+        </SectionContent>
+
+        <SectionContent>
+          <Title>Core Values</Title>
+          <Subtitle>These are the values that guide my work</Subtitle>
+          <CoreValues />
         </SectionContent>
 
         <SectionContent>
