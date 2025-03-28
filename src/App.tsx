@@ -28,8 +28,8 @@ const App = () => {
       <GlobalStyles />
       <Layout>
         <SectionContent>
-          <Title>Welcome to My Portfolio</Title>
-          <Subtitle>Product Engineer & Full Stack Developer</Subtitle>
+          <Title>Alfonso Salado</Title>
+          <Subtitle>Product Engineer - Frontend</Subtitle>
         </SectionContent>
 
         <SectionContent>
