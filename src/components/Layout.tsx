@@ -27,7 +27,67 @@ const Section = styled.section<{ isActive: boolean }>`
   transition: all 0.5s ease;
 `;
 
-const Sidebar = styled.nav`
+const BurgerButton = styled.button`
+  display: none;
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  z-index: 101;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem 0.75rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1024px) {
+    display: block;
+  }
+`;
+
+const BurgerIcon = styled.div<{ isOpen: boolean }>`
+  width: 24px;
+  height: 2px;
+  position: relative;
+  transition: all 0.3s ease;
+  left: 0;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background-color: #212529;
+    transition: all 0.3s ease;
+    left: 0;
+  }
+
+  &::before {
+    top: -8px;
+    transform: ${props => props.isOpen ? 'translateY(8px) rotate(45deg)' : 'none'};
+  }
+
+  &::after {
+    bottom: -8px;
+    transform: ${props => props.isOpen ? 'translateY(-8px) rotate(-45deg)' : 'none'};
+  }
+`;
+
+const CenterLine = styled.div<{ isOpen: boolean }>`
+  width: 24px;
+  height: 2px;
+  background-color: #212529;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: ${props => props.isOpen ? 0 : 1};
+  transform: ${props => props.isOpen ? 'scaleX(0)' : 'scaleX(1)'};
+  transition: all 0.3s ease;
+`;
+
+const Sidebar = styled.nav<{ isOpen: boolean }>`
   position: fixed;
   right: 2rem;
   top: 50%;
@@ -38,6 +98,17 @@ const Sidebar = styled.nav`
   border-radius: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 100;
+  transition: all 0.3s ease;
+
+  @media (max-width: 1024px) {
+    right: ${props => props.isOpen ? '0' : '-100%'};
+    top: 0;
+    transform: none;
+    height: 100vh;
+    width: 250px;
+    border-radius: 0;
+    padding-top: 4rem;
+  }
 `;
 
 const NavList = styled.ul`
@@ -71,6 +142,7 @@ const sections = ['Home', 'Tech', 'Jobs', 'Projects', 'Contact'];
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [activeSection, setActiveSection] = useState(0);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const sectionsRef = useRef<HTMLElement[]>([]);
 
@@ -90,7 +162,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       });
     }, options);
 
-    // Store sections in ref and observe them
     sectionsRef.current = Array.from(document.querySelectorAll('section')) as HTMLElement[];
     sectionsRef.current.forEach((section) => {
       observerRef.current?.observe(section);
@@ -105,10 +176,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const scrollToSection = (index: number) => {
     sectionsRef.current[index].scrollIntoView({ behavior: 'smooth' });
+    setIsSidebarOpen(false);
   };
 
   return (
     <LayoutContainer>
+      <BurgerButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+        <BurgerIcon isOpen={isSidebarOpen}>
+          <CenterLine isOpen={isSidebarOpen} />
+        </BurgerIcon>
+      </BurgerButton>
       <MainContent>
         {Children.map(children, (child, index) => (
           <Section isActive={activeSection === index}>
@@ -116,7 +193,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </Section>
         ))}
       </MainContent>
-      <Sidebar>
+      <Sidebar isOpen={isSidebarOpen}>
         <NavList>
           {sections.map((section, index) => (
             <NavItem
