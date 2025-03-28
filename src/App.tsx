@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import GlobalStyles from './styles/GlobalStyles';
 import Layout from './components/Layout';
+import Timeline from './components/Timeline';
 
 const SectionContent = styled.div`
   max-width: 800px;
@@ -38,6 +39,7 @@ const App = () => {
         <SectionContent>
           <Title>Experience</Title>
           <Subtitle>My professional journey</Subtitle>
+          <Timeline />
         </SectionContent>
 
         <SectionContent>

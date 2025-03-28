@@ -16,12 +16,12 @@ const MainContent = styled.main`
 `;
 
 const Section = styled.section<{ isActive: boolean }>`
-  height: 100vh;
+  min-height: 100vh;
   scroll-snap-align: start;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 2rem 1rem;
   opacity: ${props => props.isActive ? 1 : 0.3};
   transform: ${props => props.isActive ? 'scale(1)' : 'scale(0.95)'};
   transition: all 0.5s ease;
@@ -149,8 +149,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   useEffect(() => {
     const options = {
       root: null,
-      rootMargin: '0px',
-      threshold: 0.5
+      rootMargin: '-45% 0px -45% 0px',
+      threshold: 0
     };
 
     observerRef.current = new IntersectionObserver((entries) => {
@@ -167,7 +167,28 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       observerRef.current?.observe(section);
     });
 
+    // Initial check for active section
+    const checkActiveSection = () => {
+      const viewportHeight = window.innerHeight;
+      const scrollPosition = window.scrollY + (viewportHeight / 2);
+
+      sectionsRef.current.forEach((section, index) => {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          setActiveSection(index);
+        }
+      });
+    };
+
+    // Check on scroll
+    window.addEventListener('scroll', checkActiveSection);
+    // Initial check
+    checkActiveSection();
+
     return () => {
+      window.removeEventListener('scroll', checkActiveSection);
       sectionsRef.current.forEach((section) => {
         observerRef.current?.unobserve(section);
       });
@@ -176,6 +197,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const scrollToSection = (index: number) => {
     sectionsRef.current[index].scrollIntoView({ behavior: 'smooth' });
+    setActiveSection(index);
     setIsSidebarOpen(false);
   };
 
