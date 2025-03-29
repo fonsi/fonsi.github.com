@@ -53,11 +53,6 @@ const App = () => {
         </SectionContent>
 
         <SectionContent>
-          <Title>Projects</Title>
-          <Subtitle>Featured work and side projects</Subtitle>
-        </SectionContent>
-
-        <SectionContent>
           <Title>Get in Touch</Title>
           <Subtitle>You can find me here</Subtitle>
           <Contact />
