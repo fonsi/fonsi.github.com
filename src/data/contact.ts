@@ -1,4 +1,4 @@
-import GithubIcon from '../components/icons/Github.svg';
+import GithubIcon from '../components/icons/GitHub.svg';
 import LinkedInIcon from '../components/icons/LinkedIn.svg';
 
 export const contact = [
