@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import { Timeline } from './components/Timeline';
 import { CoreValues } from './components/CoreValues';
 import { Tech } from './components/Tech';
+import { Contact } from './components/Contact';
 
 const SectionContent = styled.div`
   max-width: 800px;
@@ -58,7 +59,8 @@ const App = () => {
 
         <SectionContent>
           <Title>Get in Touch</Title>
-          <Subtitle>Let's work together</Subtitle>
+          <Subtitle>You can find me here</Subtitle>
+          <Contact />
         </SectionContent>
       </Layout>
     </>
