@@ -140,7 +140,7 @@ interface LayoutProps {
 
 const sections = ['Home', 'Core Values', 'Tech', 'Jobs', 'Contact'];
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [activeSection, setActiveSection] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -231,5 +231,3 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     </LayoutContainer>
   );
 };
-
-export default Layout; 

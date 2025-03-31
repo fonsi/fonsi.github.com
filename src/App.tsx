@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import GlobalStyles from './styles/GlobalStyles';
-import Layout from './components/Layout';
+import { Layout } from './components/Layout';
 import { Timeline } from './components/Timeline';
 import { CoreValues } from './components/CoreValues';
 import { Tech } from './components/Tech';
 import { Contact } from './components/Contact';
+import { Hero } from './components/Hero';
 
 const SectionContent = styled.div`
   max-width: 800px;
@@ -30,8 +31,7 @@ const App = () => {
       <GlobalStyles />
       <Layout>
         <SectionContent>
-          <Title>Alfonso Salado</Title>
-          <Subtitle>Product Engineer - Frontend</Subtitle>
+          <Hero />
         </SectionContent>
 
         <SectionContent>
