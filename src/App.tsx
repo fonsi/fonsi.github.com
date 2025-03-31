@@ -13,6 +13,16 @@ const SectionContent = styled.div`
   text-align: center;
 `;
 
+const HeroSectionContent = styled(SectionContent)`
+  @media (min-width: 768px) {
+    max-width: 900px;
+  }
+
+  @media (min-width: 1280px) {
+    max-width: 1024px;
+  }
+`;
+
 const Title = styled.h1`
   font-size: 3rem;
   margin-bottom: 1rem;
@@ -30,9 +40,9 @@ const App = () => {
     <>
       <GlobalStyles />
       <Layout>
-        <SectionContent>
+        <HeroSectionContent>
           <Hero />
-        </SectionContent>
+        </HeroSectionContent>
 
         <SectionContent>
           <Title>Core Values</Title>
