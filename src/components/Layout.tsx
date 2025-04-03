@@ -11,13 +11,11 @@ const MainContent = styled.main`
   flex: 1;
   height: 100vh;
   overflow-y: auto;
-  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 `;
 
 const Section = styled.section<{ isActive: boolean }>`
   min-height: 100vh;
-  scroll-snap-align: start;
   display: flex;
   align-items: center;
   justify-content: center;
