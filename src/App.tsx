@@ -6,6 +6,7 @@ import { CoreValues } from './components/CoreValues';
 import { Tech } from './components/Tech';
 import { Contact } from './components/Contact';
 import { Hero } from './components/Hero';
+import { SideProjects } from './components/SideProjects';
 
 const SectionContent = styled.div`
   max-width: 800px;
@@ -54,6 +55,12 @@ const App = () => {
           <Title>Tech Stack</Title>
           <Subtitle>Main technologies I work with</Subtitle>
           <Tech />
+        </SectionContent>
+
+        <SectionContent>
+          <Title>Side Projects</Title>
+          <Subtitle>Things I build outside of my day job</Subtitle>
+          <SideProjects />
         </SectionContent>
 
         <SectionContent>

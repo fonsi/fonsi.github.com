@@ -136,7 +136,7 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-const sections = ['Home', 'Core Values', 'Tech', 'Jobs', 'Contact'];
+const sections = ['Home', 'Core Values', 'Tech', 'Side Projects', 'Jobs', 'Contact'];
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [activeSection, setActiveSection] = useState(0);
