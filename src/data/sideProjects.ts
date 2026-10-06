@@ -13,7 +13,7 @@ export const sideProjects: SideProject[] = [
     id: 'jobmeerkat',
     name: 'Jobmeerkat',
     url: 'https://jobmeerkat.com',
-    imageSrc: '/side-projects/jobmeerkat-screenshot.webp',
+    imageSrc: '/side-projects/jobmeerkat-screenshot-2.webp',
     imageAlt: 'Jobmeerkat project preview',
     description:
       'A job board focused on remote roles with transparent salary information. New job listings are scraped daily from company career pages and analyzed with AI to estimate salary ranges and extract relevant details.',
